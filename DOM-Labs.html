@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Lab: Document Object Model</title>
+</head>
+<body>
+
+<!–– Sum Numbers ––>
+<input type="text" id="num1" /> +
+<input type="text" id="num2" /> =
+<input type="text" id="sum" readonly="readonly" />
+<input type="button" value="Calc" onclick="calc()" />
+<script>
+    function calc() { 
+        let num1 = document.getElementById("num1").value
+        let num2 = document.getElementById("num2").value
+        let sum = Number(num1) + Number(num2)
+        document.getElementById("sum").value = sum
+    }
+</script>
+
+<hr/>
+<!–– Show More ––>
+<p>Welcome to the "Show More Text Example".</p>
+<a href="#" id="more" onclick= "showText()">Read more …</a>
+<span id="text" style= "display:none">Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br />Welcome to JavaScript and DOM.<br /></span>
+<!-- <a href="#" id="less" onclick= "hideText()">Read less …</a> -->
+
+<script>
+  function showText() {
+      document.getElementById("more").style.display = "none"
+      document.getElementById("text").style.display = "inline"
+  }
+
+//   function hideText() {
+//     document.getElementById("more").style.display = ""
+//     document.getElementById("text").style.display = "none"
+//   }
+</script>
+
+<hr/>
+<!–– Collect List Items ––>
+<ul id="items">
+        <li>first item</li>
+        <li>second item</li>
+        <li>third item</li>
+      </ul>
+      <textarea id="result"></textarea>
+      <br>
+      <button onclick="extractText()">Extract Text</button>
+      <script>
+        function extractText() {
+            let lis = document.querySelectorAll("#items li")
+            
+            for (let li of lis) {
+                document.getElementById("result").value += li.textContent + "\n"
+            }
+        }
+      </script>
+
+<hr/>
+<!–– Colorize Table ––>
+<table>
+        <tr><th>Name</th><th>Town</th></tr>
+        <tr><td>Eve</td><td>Sofia</td></tr>
+        <tr><td>Nick</td><td>Varna</td></tr>
+        <tr><td>Didi</td><td>Ruse</td></tr>
+        <tr><td>Tedy</td><td>Varna</td></tr>
+      </table>
+      <button onclick="colorize()">Colorize</button>
+      <script>
+        function colorize() {
+            let rows = document.querySelectorAll("table tr")
+            let counter = 0
+            for (const row of rows) {
+                counter++
+                if (counter % 2 === 0) {
+                    row.style.background = "maroon"
+                }
+            }            
+            
+        }
+      </script>
+
+<hr/>
+<!–– Countdown ––>
+<input type="text" id="time" style="border:3px solid blue; text-align:center; font-size:2em;" disabled="true"/>
+<script>window.onload = function() { countdown(600); }</script>
+<script>
+    function countdown(startTime){
+        let time = startTime
+        let box = document.getElementById("time")
+        let intervalID = setInterval(decrement, 1000)
+
+        function decrement(){
+            time--
+            box.value = Math.trunc(time / 60) + ":" + ("0" + (time % 60)).slice(-2)
+        }
+    }
+</script>
+<hr/>
+<!–– Extract Parenthesis ––>
+<p id="content">Rakiya (Bulgarian brandy) is home-made liquor (alcoholic drink). It can be made of grapes, plums or other fruits (even apples).</p>
+<script>
+    let text = extract("content");
+    
+    function extract(id){
+        let val = document.getElementById(id).textContent
+        let regex = /\((.+?)\)/gm
+        let output = []
+        let found = regex.exec(val)
+        while (found) {
+            output.push(found[1])            
+            found = regex.exec(val)
+        }
+
+        return output.join("; ")        
+    }
+</script>
+<hr/>
+<!–– * Sum Table ––>
+<div>
+<table>
+        <tbody>
+          <tr><th>Product</th><th>Cost</th></tr>
+          <tr><td>Beer</td>   <td>2.88</td></tr>
+          <tr><td>Fries</td>  <td>2.15</td></tr>
+          <tr><td>Burger</td> <td>4.59</td></tr>
+          <tr><td>Total:</td> <td id="sum"></td></tr>
+        </tbody>
+      </table>
+      <button onclick="sum()">Sum</button>
+</div>
+<script>
+    function sum(){
+        let trs = document.querySelectorAll("div table tr")
+        
+        let total = 0
+        for (let i = 1; i < trs.length; i++) {
+            let cols = trs[i].children
+            let costs = cols[cols.length - 1].textContent
+            total += Number(costs)
+        }
+
+        document.querySelector("div table tr #sum").textContent = total
+    }
+</script>
+</body>
