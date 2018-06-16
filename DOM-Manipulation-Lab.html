@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Lab: DOM Manipulation</title>
+    <style>
+        #gradient-box {
+            width: 300px;
+            border: 2px solid lightgrey;
+    }
+    #gradient-box:hover {
+        border: 2px solid black;
+    }
+    #gradient {
+        height: 30px;
+        color: white;
+        text-shadow: 1px 1px 10px black;
+        text-align: center;
+        line-height: 30px;
+        background: linear-gradient(to right, black, white);
+        cursor: crosshair;
+    }
+    div { 
+        width: 470px; 
+    }
+    div div div {
+        text-align: center;
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        margin: 15px;
+        border: 1px solid #999;
+    }
+    .focused { 
+        background: #999999; 
+    }
+    .error {
+        border: 2px solid red; 
+    }
+    </style>
+</head>
+<body onload="validate()">
+        <!-- <!–– List of Items ––>
+        <h1>List of Items</h1>
+        <ul id="items"><li>First</li><li>Second</li></ul>
+        <input type="text" id="newItemText" />
+        <input type="button" value="Add" onclick="addItem()">
+        <script>
+          function addItem() {
+            let inputText = document.getElementById("newItemText").value
+            let newItem = document.createElement("li")  
+            newItem.textContent = inputText
+             
+            document.getElementById("items").appendChild(newItem) 
+            document.getElementById("newItemText").value = ""        
+          }
+        </script> -->
+
+<!-- <hr />
+<!–– Add and Delete ––>
+<h1>List of Items</h1>
+<ul id="items"></ul>
+<input type="text" id="newText" />
+<input type="button" value="Add"
+    onclick="addItem()">
+<script>
+    function addItem() { 
+        let inputText = document.getElementById("newText").value
+        let newItem = document.createElement("li")  
+        newItem.textContent = inputText + " "
+
+        let newAnchor = document.createElement("a")
+        newAnchor.textContent = "[Delete]"
+        newAnchor.setAttribute("href", "#")
+        newAnchor.addEventListener("click", deleteItem)
+        newItem.appendChild(newAnchor)
+            
+        document.getElementById("items").appendChild(newItem) 
+        document.getElementById("newText").value = ""  
+        
+        function deleteItem() { 
+            let liDel = this.parentNode.parentNode
+            liDel.removeChild(this.parentNode)
+        }
+    }
+</script> -->
+<!-- 
+<hr />
+<!–– Delete from Table ––>
+<table border="1" id="customers">
+    <tr><th>Name</th><th>Email</th></tr>
+    <tr><td>Eve</td><td>eve@gmail.com</td></tr>
+    <tr><td>Nick</td><td>nick@yahooo.com</td></tr>
+    <tr><td>Didi</td><td>didi@didi.net</td></tr>
+    <tr><td>Tedy</td><td>tedy@tedy.com</td></tr>
+</table>
+Email: <input type="text" name="email" />
+<button onclick="deleteByEmail()">Delete</button>
+<div id="result" />
+<script>
+       function deleteByEmail(){
+           let email = document.getElementsByName("email")[0].value.trim()
+           let tableEmails = document.querySelectorAll("#customers tr td:nth-child(2)")
+            for (const em of tableEmails) {
+                if (em.textContent === email) {
+                    em.parentNode.parentNode.removeChild(em.parentNode)
+                    document.getElementById("result").textContent = "Deleted."
+                    return
+                }
+            }           
+            document.getElementById("result").textContent = "Not found."
+       }
+</script>
+
+<hr />
+<!–– Stopwatch ––>
+<div id="time" style="border:3px solid blue; text-align:center; font-size:2em; margin-bottom:10px">00:00</div>
+<button id="startBtn">Start</button>
+<button id="stopBtn" disabled="true">Stop</button>
+<script>
+    window.onload = function() {stopwatch()}
+    function stopwatch() {
+        let time, intervalID
+        let startBtn = document.getElementById('startBtn')
+        let stopBtn = document.getElementById('stopBtn')
+
+        startBtn.addEventListener('click', function() {
+            time = -1
+            incrementTime()
+            intervalID = setInterval(incrementTime, 1000)
+            startBtn.disabled = true
+            stopBtn.disabled = false
+        })
+
+        stopBtn.addEventListener('click', function() {
+            clearInterval(intervalID)
+            startBtn.disabled = false
+            stopBtn.disabled = true
+        })
+
+        function incrementTime() {
+            time++
+            document.getElementById('time').textContent = ("0" + Math.trunc(time / 60)).slice(-2) + ':' + ("0" + (time % 60)).slice(-2);
+        }
+    }
+</script> -->
+
+<!-- <hr />
+<!–– Mouse Gradient ––>
+<div id="gradient-box">
+    <div id="gradient">Click me!</div>
+</div>
+<div id="result"></div>
+<script>
+    function attachGradientEvents(){
+        let gradient = document.getElementById("gradient")
+        gradient.addEventListener("mousemove", gradientMove)
+        gradient.addEventListener("mouseout", gradientOut)
+
+        function gradientMove(event) {
+            let power = event.offsetX / (event.target.clientWidth - 1)
+            power = Math.trunc(power * 100)
+            document.getElementById('result').textContent = power + "%"          
+        }
+
+        function gradientOut() {
+            document.getElementById('result').textContent = ""
+        }
+    }
+</script> -->
+
+<!-- <hr />
+<!–– Highlight Active ––>
+<div >
+    <div>
+        <div><h1>Section 1</h1><input type="text"/></div>
+        <div><h1>Section 2</h1><input type="text"/></div>
+        <div><h1>Section 3</h1><input type="text"/></div>
+        <div><h1>Section 4</h1><input type="text"/></div>
+    </div>
+    <script>
+        function focus() {
+            let inputs = document.getElementsByTagName('input')
+            Array.from(inputs).forEach(i => {
+                i.addEventListener('focus', (event) => {
+                    event.target.parentNode.className = 'focused'
+                })
+                i.addEventListener('blur', (event) => {
+                    event.target.parentNode.removeAttribute('class')
+                })
+            })
+        }
+    </script>
+</div> -->
+
+<hr />
+<!–– Dynamic Validation ––>
+<label for="email">Enter email:</label>
+    <input id="email" type="text"/>
+    <script>
+        function validate() {
+           let input = document.getElementById("email")
+           let regex = /\b[^@ ]+?@[^@ ]+?\.[^@ ]+?\b/i
+           
+           input.addEventListener("change", (event) => {
+               let em = event.target.value
+               let test = regex.test(em)
+
+               if (!test) {
+                    event.target.className = "error"
+               } else {
+                    event.target.removeAttribute("class")
+               }
+           })
+        }
+    </script>
+</body>
