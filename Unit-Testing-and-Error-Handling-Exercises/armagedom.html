@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>ArmageDOM</title>
+    <script src="armagedom.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <div id="target">
@@ -18,4 +20,8 @@
     </div>
 </div>
 </body>
+<script>
+    console.log($(".nested").text());
+    console.log($(".nested").filter($("span")).text());
+</script>
 </html>

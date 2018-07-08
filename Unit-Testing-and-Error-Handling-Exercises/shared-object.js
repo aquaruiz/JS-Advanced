@@ -5,6 +5,7 @@ let sharedObject = {
         if (name.length === 0) {
             return;
         }
+
         this.name = name;
         let newName = $('#name');
         newName.val(this.name);
@@ -13,6 +14,7 @@ let sharedObject = {
         if (!Number.isInteger(income) || income <= 0) {
             return;
         }
+
         this.income = income;
         let newIncome = $('#income');
         newIncome.val(this.income);
@@ -22,6 +24,7 @@ let sharedObject = {
         if (newName.length === 0) {
             return;
         }
+
         this.name = newName;
     },
     updateIncome: function () {
@@ -29,6 +32,13 @@ let sharedObject = {
         if (isNaN(newIncome) || !Number.isInteger(Number(newIncome)) || Number(newIncome) <= 0) {
             return;
         }
+
         this.income = Number(newIncome);
     }
 };
+
+let nameBox = $("#name");
+
+console.log(nameBox);
+
+module.exports = {sharedObject};
