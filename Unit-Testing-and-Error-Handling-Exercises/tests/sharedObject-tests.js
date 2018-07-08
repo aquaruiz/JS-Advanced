@@ -1,17 +1,3 @@
-let expect = require('chai').expect;
-
-// jsdom-global & jquery required for manipulating & testing in DOM
-let jsdom = require('jsdom-global')();
-let $ = require('jquery');
-global.$ = $;   // NB! attach $ globally otherwise Error: '$ is not defined'
-
-document.body.innerHTML = `<div id="wrapper">
-    <input type="text" id="name">
-    <input type="text" id="income">
-    </div>`;
-
-let sharedObject = require('../shared-object').sharedObject;
-
 describe('sharedObject', function () {
     describe("name property", function () {
         it("should start with null value upon initialization", function () {
@@ -36,9 +22,8 @@ describe('sharedObject', function () {
         it("should not change 'name' textbox with invalid parameters & preexisting value", function () {
             let nameTextbox = $('#name');
             nameTextbox.val('previous');
-            sharedObject.name = 'previous';
             sharedObject.changeName('');
-            expect(sharedObject.name).to.equal('previous', 'Name changes incorrectly');
+            expect(nameTextbox.val()).to.equal('previous', 'Name changes incorrectly');
         });
         it("should change 'name' property with valid parameters", function () {
             sharedObject.changeName('new');
@@ -47,7 +32,7 @@ describe('sharedObject', function () {
         it("should change 'name' textbox with valid parameters", function () {
             sharedObject.changeName('new2');
             let nameTextbox = $('#name');
-            expect(sharedObject.name).to.equal('new2', 'Name changes incorrectly');
+            expect(nameTextbox.val()).to.equal('new2', 'Name changes incorrectly');
         });
     });
     describe("changeIncome", function () {
