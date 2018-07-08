@@ -1,5 +1,5 @@
 let result = (function () {
-    let suits = {
+    let Suits = {
         'CLUBS': "\u2663",  // ♣
         'DIAMONDS': "\u2666",  // ♦
         'HEARTS': "\u2665",  // ♥
@@ -20,7 +20,7 @@ let result = (function () {
 
         set face(f) {
             if (!faces.includes(f)){
-                throw new Error("Invalid Face! " + f);
+                throw new Error("Invalid card face: " + f);
             }
 
             this._face = f;
@@ -31,21 +31,21 @@ let result = (function () {
         }
 
         set suit(s) {
-            if (!Object.values(suits)
+            if (!Object.keys(Suits).map(k => Suits[k])
                 .includes(s)){
-                throw new Error("Invalid Suit! " + s)
+                throw new Error("Invalid card suite: " + s)
             }
 
             this._suit = s;
         }
 
         toString() {
-            return this._face + this._suit;
+            return this.face+this.suit;
         }
     }
 
     return {
-        Suits: suits,
+        Suits: Suits,
         Card: Card
     }
 }());
@@ -53,10 +53,10 @@ let result = (function () {
 let Card = result.Card;
 let Suits = result.Suits;
 
-let card = new Card("Q", Suits.CLUBS);
-console.log(card + "");
-
-card.face = "A";
-card.suit = Suits.DIAMONDS;
+let card = new Card("2",Suits.SPADES);
+// console.log(card + "");
+//
+// card.face = "A";
+// card.suit = Suits.DIAMONDS;
 console.log(card + "");
 // let card2 = new Card("1", Suits.DIAMONDS);
