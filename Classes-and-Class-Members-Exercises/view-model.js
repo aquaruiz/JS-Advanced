@@ -3,13 +3,17 @@ class Textbox {
         this._elements = $(selector);
         this._invalidSymbol = regex;
 
-        let that = this;
-
-        this.elements.on("input", function (event) {
-            that.value = $(event.target).val();
-        })
+        $(this._elements).on("input valueChange", (event) => {
+            this._value = $(event.target).val();
+			this.updateElements(); 
+		)
     }
 
+	updateElements(){
+		for(let el of this._elements){
+			$(el).val(this._value);}
+	}
+	
     get elements() {
         return this._elements;
     }
@@ -18,9 +22,9 @@ class Textbox {
         return this._value;
     }
 
-    set value(text) {
-        this._value = text;
-        this.elements.val(text);
+    set value(newValue) {
+        this._value = newValue;
+		this.updateElements();
     }
 
     isValid(){
