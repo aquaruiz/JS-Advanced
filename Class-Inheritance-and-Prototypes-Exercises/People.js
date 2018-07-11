@@ -18,12 +18,12 @@ function workItOut() {
             this.tasks.push(currentTask);
         }
 
-        collectSalary () {
-            return `${this.name} received ${this.calcSalary()} this month.`
-        }
-
         calcSalary(){
             return this.salary;
+        }
+
+        collectSalary () {
+            console.log(`${this.name} received ${this.calcSalary()} this month.`);
         }
     }
 
@@ -67,7 +67,7 @@ function workItOut() {
 // junior.salary = 1000;
 // junior.work();
 // junior.collectSalary();
-
+//
 // let Senior = workItOut().Senior;
 // let senior = new Senior('Senior', 35);
 // senior.salary = 5000;
@@ -75,10 +75,10 @@ function workItOut() {
 //     senior.work();
 // senior.collectSalary();
 
-let Manager = workItOut().Manager;
-let manager = new Manager('Manager', 50);
-manager.dividend = 10000;
-manager.salary = 10000;
-for (let i = 0; i < 22; i++)
-    manager.work();
-console.log(manager.collectSalary());
+// let Manager = workItOut().Manager;
+// let manager = new Manager('Manager', 50);
+// manager.dividend = 10000;
+// manager.salary = 10000;
+// for (let i = 0; i < 22; i++)
+//     manager.work();
+// manager.collectSalary();
