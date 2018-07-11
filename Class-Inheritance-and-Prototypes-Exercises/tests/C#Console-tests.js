@@ -12,7 +12,7 @@ describe("Class C# Console", function () {
         });
     });
     describe("writeLine(string) tests", function () {
-        it('should return same string if string input', function () {
+        it('should return same string if one string input', function () {
             expect(Console.writeLine("beeee")).to.be.equal("beeee");
         });
     });
@@ -49,6 +49,9 @@ describe("Class C# Console", function () {
             let params = ['The sum is {0}', 'three'];
             let result = Console.writeLine(...params);
             expect(result).to.equal('The sum is three');
+        });
+        it('should throw error if placeholders are not equal to params', function () {
+            expect(() => Console.writeLine("BA{0}{1}", 2, 3, 4)).to.throw(RangeError);
         });
     })
 });
