@@ -1,5 +1,4 @@
 function postIt() {
-
     class Post {
         constructor(title, content) {
             this.title = title;
@@ -24,7 +23,11 @@ function postIt() {
         }
 
         toString() {
-            return super.toString() + `\nRating: ${this.likes - this.dislikes}\nComments:\n` + this.comments.map(e => ` * ` + e).join(`\n`);
+            if(this.comments.length === 0){
+                return super.toString() + `\nRating: ${this.likes - this.dislikes}`;
+            } else {
+                return super.toString() + `\nRating: ${this.likes - this.dislikes}\nComments:\n` + this.comments.map(e => ` * ` + e).join(`\n`);
+            }
         }
     }
 
@@ -49,17 +52,18 @@ function postIt() {
     }
 }
 
-let post = new Post("Post1", "Content1");
+let Post = postIt();
+let post = new Post.Post("Post1", "Content1");
 console.log(post.toString());
 
 // Post: Post
 // Content: Content
 
-let scm = new SocialMediaPost("TestTitle", "TestContent", 25, 30);
+let scm = new Post.SocialMediaPost("TestTitle", "TestContent", 25, 30);
 
-scm.addComment("Good post");
-scm.addComment("Very good post");
-scm.addComment("Wow!");
+// scm.addComment("Good post");
+// scm.addComment("Very good post");
+// scm.addComment("Wow!");
 
 console.log(scm.toString());
 
